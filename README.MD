@@ -1,1 +1,1 @@
-hello
+# Tipically frontend proyect for fun
