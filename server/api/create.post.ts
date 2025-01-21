@@ -9,7 +9,7 @@ export default defineEventHandler(async event => {
 	let created = null
 	//const json = JSON.parse(body)
 
-	created = fs.writeFile(`public/${name}.json`, body, (e) => {
+	created = fs.writeFile(`public/entries/${name}.json`, body, (e) => {
 		if (e) {
 			console.log('[Create/Error]:', e)
 			created =  false
