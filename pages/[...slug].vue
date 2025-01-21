@@ -1,22 +1,30 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const route = useRoute()
 // const slug = `/${route.params.slug.join('/')}`
 const fileName = ref('')
 const message = ref('')
+const body = computed(() => ({
+	data: JSON.stringify({name: fileName.value })
+}))
 
 const createFile = async () => {
-	const data = await $fetch('/api/create', {
-		body: JSON.Sstringify({ name: fileName.value })
-	})
-	message.value = 'File Creaed successfully!.'
+	
+	message.value = await $fetch('/api/create', {
+		method: 'POST',
+		body: {
+			name: fileName.value
+		}
+	}).then(r => r)
+	.catch(e => e)
 }
 </script>
 
 <template>
 	<div>
 		file name: {{ fileName }} <br />
+		<p>JSON: {{ body }}</p>
 		<input v-model="fileName"  /> &nbsp;
 		<button @click="createFile">Create a test file</button>
 		<p v-if="message">{{message}}</p>
