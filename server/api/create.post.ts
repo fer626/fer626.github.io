@@ -4,12 +4,10 @@ export default defineEventHandler(async event => {
 	// const fs = require('fs')
 	const params = await readBody(event)
 	console.log('name:', params)
-	const { name } = params
+	const { name, body } = params
 	console.log('name:', name)
 	let created = null
-	const json = JSON.stringify({
-		hello: 'world'
-	})
+	const json = JSON.stringify(body)
 
 	created = fs.writeFile(`public/${name}.json`, json, (e) => {
 		if (e) {
